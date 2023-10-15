@@ -431,6 +431,3 @@ public class SoccerGame extends JPanel implements ActionListener, KeyListener {
         }
     }
 }
-
-message.txt
-16 KB
