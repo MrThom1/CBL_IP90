@@ -9,7 +9,9 @@ import java.io.IOException;
 public class StartScreen extends JPanel implements ActionListener {
 
     private Image backgroundImage; // Image for the start screen
-    public JButton playButton;
+    public JButton multiPlayButton;
+    public JButton singlePlayButton;
+
 
     public StartScreen(int screenWidth, int screenHeight) {
         JPanel panel = new JPanel();
@@ -24,28 +26,41 @@ public class StartScreen extends JPanel implements ActionListener {
         }
 
         // Create a button
-        playButton = new JButton("Play");
+        multiPlayButton = new JButton("Play");
         int buttonWidth = 360;
         int buttonHeight = 140;
-        int buttonX = (screenWidth - buttonWidth) / 2;
+        int buttonX = (screenWidth - buttonWidth) / 2 + 200 ;
         int buttonY = Math.toIntExact(Math.round(((screenHeight - buttonHeight) / 2)*1.9));
-
-        //playButton.setSize(buttonWidth, buttonHeight);
-        //playButton.setLocation(buttonX, buttonY);
         
         // Add the button to the panel
         this.setLayout(null);
-        this.add(playButton);
-        playButton.setBounds(buttonX,buttonY,buttonWidth,buttonHeight);  
+        this.add(multiPlayButton);
+        multiPlayButton.setBounds(buttonX,buttonY,buttonWidth,buttonHeight);  
 
         // Set a dummy action listener for the button
-        playButton.addActionListener(e -> {
+        multiPlayButton.addActionListener(e -> {
+            //setVisible(false);
+        });
+        
+        singlePlayButton = new JButton("Play");
+        buttonX = (screenWidth - buttonWidth) / 2 - 200;
+
+        // Add the button to the panel
+        this.setLayout(null);
+        this.add(singlePlayButton);
+        singlePlayButton.setBounds(buttonX,buttonY,buttonWidth,buttonHeight);  
+
+        // Set a dummy action listener for the button
+        singlePlayButton.addActionListener(e -> {
             //setVisible(false);
         });
     }
 
-    public void addPlayButtonActionListener(ActionListener listener) {
-        playButton.addActionListener(listener);
+    public void addMultiPlayerActionListener(ActionListener listener) {
+        multiPlayButton.addActionListener(listener);
+    }
+    public void addSinglePlayerActionListener(ActionListener listener) {
+        singlePlayButton.addActionListener(listener);
     }
 
     @Override
