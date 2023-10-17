@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
 
-public class SoccerGame extends JPanel implements ActionListener, KeyListener {
+public class SoccerGameMultiPlayer extends JPanel implements ActionListener, KeyListener {
 
     private BufferedImage backgroundImage;  // Image for the background
     private BufferedImage player1Image; // Image for player 1
@@ -35,7 +35,7 @@ public class SoccerGame extends JPanel implements ActionListener, KeyListener {
     private int player1Score = 0;
     private int player2Score = 0;
 
-    private int timerSeconds = 5 * 60;  // 5 minutes timer
+    private int timerSeconds = 2 * 60; 
     private Timer gameTimer = new Timer(1000, new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -47,7 +47,7 @@ public class SoccerGame extends JPanel implements ActionListener, KeyListener {
         }
     });
 
-    public SoccerGame(int screenWidth, int screenHeight) {
+    public SoccerGameMultiPlayer(int screenWidth, int screenHeight) {
         this.screenWidth = screenWidth;
         this.screenHeight = screenHeight;
         timer = new Timer(10, this);
@@ -326,7 +326,7 @@ public class SoccerGame extends JPanel implements ActionListener, KeyListener {
         keysPressed.remove(key);
     }
 
-    public void startSoccerGame(SoccerGame soccerGame) {
+    public void startSoccerGame(SoccerGameMultiPlayer soccerGame) {
         soccerGame.gameTimer.start();
         
     }
