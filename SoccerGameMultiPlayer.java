@@ -36,7 +36,7 @@ public class SoccerGameMultiPlayer extends JPanel implements ActionListener, Key
     private int player2Score = 0;
 
     private int timerSeconds = 2 * 60; 
-    private Timer gameTimer = new Timer(1000, new ActionListener() {
+    Timer gameTimer = new Timer(1000, new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
             timerSeconds--;

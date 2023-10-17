@@ -17,10 +17,19 @@ public class Handler {
         frame.setVisible(true);
         frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
         // Add an ActionListener to the "Play" button
-        startScreen.addPlayButtonActionListener(e -> {
+        startScreen.addMultiPlayerActionListener(e -> {
             startScreen.setVisible(false);  // Hide the start screen
             frame.remove(startScreen);
             SoccerGameMultiPlayer soccerGame = new SoccerGameMultiPlayer(screenWidth, screenHeight);
+            frame.add(soccerGame);  // Add the SoccerGame panel
+            soccerGame.requestFocus();
+            // Start the game
+            soccerGame.startSoccerGame(soccerGame);
+        });
+        startScreen.addSinglePlayerActionListener(e -> {
+            startScreen.setVisible(false);  // Hide the start screen
+            frame.remove(startScreen);
+            SoccerGameSinglePlayer soccerGame = new SoccerGameSinglePlayer(screenWidth, screenHeight);
             frame.add(soccerGame);  // Add the SoccerGame panel
             soccerGame.requestFocus();
             // Start the game
