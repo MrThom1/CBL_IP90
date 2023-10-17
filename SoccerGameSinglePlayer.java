@@ -28,7 +28,6 @@ public class SoccerGameSinglePlayer extends JPanel implements ActionListener, Ke
     private int playerSpeed = 5;
     private int screenWidth;
     private int screenHeight;
-    private boolean ballHitRecently = false;  // Indicates if the ball has been hit recently
 
     private Set<Integer> keysPressed = new HashSet<>();
     private Timer timer;
@@ -152,8 +151,6 @@ public class SoccerGameSinglePlayer extends JPanel implements ActionListener, Ke
         ballY += ballSpeedY;
         checkCollisions();
 
-        ballHitRecently = false;
-
         movePlayer1();
 
         moveBot();
@@ -177,7 +174,6 @@ public class SoccerGameSinglePlayer extends JPanel implements ActionListener, Ke
         ballSpeedX = 10 * unitX;
         ballSpeedY = 10 * unitY;
 
-        ballHitRecently = true;
     }
 
     private void handlePlayerbotCollision() {
@@ -344,5 +340,10 @@ public class SoccerGameSinglePlayer extends JPanel implements ActionListener, Ke
     public void keyReleased(KeyEvent e) {
         int key = e.getKeyCode();
         keysPressed.remove(key);
+    }
+
+    public void startSoccerGame(SoccerGameSinglePlayer soccerGame) {
+        soccerGame.gameTimer.start();
+        
     }
 }
