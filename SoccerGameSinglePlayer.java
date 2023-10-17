@@ -345,22 +345,4 @@ public class SoccerGameSinglePlayer extends JPanel implements ActionListener, Ke
         int key = e.getKeyCode();
         keysPressed.remove(key);
     }
-
-    public static void main(String[] args) {
-        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        int screenWidth = (int) screenSize.getWidth();
-        int screenHeight = (int) screenSize.getHeight();
-
-        JFrame frame = new JFrame("2D Soccer Game");
-        SoccerGameSinglePlayer soccerGame = new SoccerGameSinglePlayer(screenWidth, screenHeight);
-        frame.add(soccerGame);
-        frame.setUndecorated(true);
-        frame.setSize(screenWidth, screenHeight);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setVisible(true);
-        frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
-
-        // Start the game timer
-        soccerGame.gameTimer.start();
-    }
 }

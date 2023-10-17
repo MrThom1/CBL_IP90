@@ -20,7 +20,7 @@ public class Handler {
         startScreen.addPlayButtonActionListener(e -> {
             startScreen.setVisible(false);  // Hide the start screen
             frame.remove(startScreen);
-            SoccerGame soccerGame = new SoccerGame(screenWidth, screenHeight);
+            SoccerGameMultiPlayer soccerGame = new SoccerGameMultiPlayer(screenWidth, screenHeight);
             frame.add(soccerGame);  // Add the SoccerGame panel
             soccerGame.requestFocus();
             // Start the game
