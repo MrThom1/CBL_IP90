@@ -25,12 +25,9 @@ public class SoccerGame extends JPanel implements ActionListener, KeyListener {
     private int ballRadius = 40;
     private double ballSpeedX = 0;
     private double ballSpeedY = 0;
-    private double frictionFactor = 0.98;  // Factor by which speed is reduced each tick
     private int playerSpeed = 5;
-    private int ballAccelerationFactor = 3;  // Increased acceleration factor for faster bounce
     private int screenWidth;
     private int screenHeight;
-    private boolean ballHitRecently = false;  // Indicates if the ball has been hit recently
 
     private Set<Integer> keysPressed = new HashSet<>();
     private Timer timer;
@@ -38,7 +35,7 @@ public class SoccerGame extends JPanel implements ActionListener, KeyListener {
     private int player1Score = 0;
     private int player2Score = 0;
 
-    private int timerSeconds = 2 * 60;  // 5 minutes timer
+    private int timerSeconds = 5 * 60;  // 5 minutes timer
     private Timer gameTimer = new Timer(1000, new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -154,8 +151,6 @@ public class SoccerGame extends JPanel implements ActionListener, KeyListener {
         ballY += ballSpeedY;
         checkCollisions();
 
-        ballHitRecently = false;
-
         movePlayers();
 
         checkGoal();
@@ -163,7 +158,7 @@ public class SoccerGame extends JPanel implements ActionListener, KeyListener {
         repaint();
     }
 
-    private void handleCollision(int playerX, int playerY) {
+    public void handleCollision(int playerX, int playerY) {
         int dx = ballX - playerX;
         int dy = ballY - playerY;
         double distance = Math.sqrt(dx * dx + dy * dy);
@@ -177,10 +172,9 @@ public class SoccerGame extends JPanel implements ActionListener, KeyListener {
         ballSpeedX = 10 * unitX;
         ballSpeedY = 10 * unitY;
 
-        ballHitRecently = true;
     }
 
-    private void handlePlayerCollision() {
+    public void handlePlayerCollision() {
         double dx = player2X - player1X;
         double dy = player2Y - player1Y;
         double distance = Math.sqrt(dx * dx + dy * dy);
@@ -212,7 +206,7 @@ public class SoccerGame extends JPanel implements ActionListener, KeyListener {
         }
     }
 
-    private void movePlayers() {
+    public void movePlayers() {
         int newPlayer1X = player1X;
         int newPlayer1Y = player1Y;
 
@@ -251,7 +245,7 @@ public class SoccerGame extends JPanel implements ActionListener, KeyListener {
         player2Y = newPlayer2Y;
     }
 
-    private void checkCollisions() {
+    public void checkCollisions() {
         int borderSizeX;
         if (ballY > (0.35 * screenHeight) && ballY < (0.65 * screenHeight)) {
             borderSizeX = 10;
@@ -289,21 +283,21 @@ public class SoccerGame extends JPanel implements ActionListener, KeyListener {
         }
     }
 
-    private void resetBallToCenter() {
+    public void resetBallToCenter() {
         ballX = screenWidth / 2;
         ballY = screenHeight / 2;
         ballSpeedX = 0;
         ballSpeedY = 0;
     }
 
-    private void resetPlayersToCenter() {
+    public void resetPlayersToCenter() {
         player1X = screenWidth / 2 - 150;
         player1Y = screenHeight / 2 - 1;
         player2X = screenWidth / 2 + 150;
         player2Y = screenHeight / 2 + 1;
     }
 
-    private void checkGoal() {
+    public void checkGoal() {
         if (ballX < (155 - ballRadius)) {
             resetBallToCenter();
             resetPlayersToCenter();
@@ -313,17 +307,6 @@ public class SoccerGame extends JPanel implements ActionListener, KeyListener {
             resetPlayersToCenter();
             player1Score++;
         }
-    }
-
-    public void startGame() {
-        // Reset any necessary game variables
-        resetBallToCenter();
-        resetPlayersToCenter();
-        player1Score = 0;
-        player2Score = 0;
-
-        // Start the game timer
-        gameTimer.start();
     }
 
     @Override
@@ -343,26 +326,8 @@ public class SoccerGame extends JPanel implements ActionListener, KeyListener {
         keysPressed.remove(key);
     }
 
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> {
-            JFrame frame = new JFrame("2D Soccer Game");
-            Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-            int screenWidth = (int) screenSize.getWidth();
-            int screenHeight = (int) screenSize.getHeight();
-    
-            StartScreen startScreen = new StartScreen(screenWidth, screenHeight);
-            frame.add(startScreen);
-            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
-            frame.setUndecorated(true);
-            frame.setVisible(true);
-    
-            startScreen.addPlayButtonActionListener(e -> {
-                startScreen.setVisible(false);  // Hide the start screen
-                SoccerGame soccerGame = new SoccerGame(screenWidth, screenHeight);
-                frame.add(soccerGame);  // Add the SoccerGame panel
-                soccerGame.startGame();  // Start the game
-            });
-        });
-    }    
+    public void startSoccerGame(SoccerGame soccerGame) {
+        soccerGame.gameTimer.start();
+        
+    }
 }
