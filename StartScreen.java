@@ -23,7 +23,7 @@ public class StartScreen extends JPanel implements ActionListener {
             e.printStackTrace();
         }
     
-        multiPlayButton = new JButton("MultiPlayer!");
+        multiPlayButton = new JButton("");
         int buttonWidth = 360;
         int buttonHeight = 200;
         int buttonX = (screenWidth - buttonWidth) / 2 + 200;
@@ -46,7 +46,7 @@ public class StartScreen extends JPanel implements ActionListener {
         multiPlayButton.addActionListener(e -> {
         });
     
-        singlePlayButton = new JButton("SinglePlayer!");
+        singlePlayButton = new JButton("");
         buttonX = (screenWidth - buttonWidth) / 2 - 200;
     
         ImageIcon singlePlayerIcon = new ImageIcon("SinglePlayerButton.png");
