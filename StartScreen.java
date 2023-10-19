@@ -8,7 +8,7 @@ import java.io.IOException;
 
 public class StartScreen extends JPanel implements ActionListener {
 
-    private Image backgroundImage; // Image for the start screen
+    private Image backgroundImage;
     public JButton multiPlayButton;
     public JButton singlePlayButton;
 
@@ -44,7 +44,6 @@ public class StartScreen extends JPanel implements ActionListener {
         multiPlayButton.setBounds(buttonX, buttonY, buttonWidth, buttonHeight);
     
         multiPlayButton.addActionListener(e -> {
-            // setVisible(false);
         });
     
         singlePlayButton = new JButton("SinglePlayer!");
@@ -64,7 +63,6 @@ public class StartScreen extends JPanel implements ActionListener {
         singlePlayButton.setBounds(buttonX, buttonY, buttonWidth, buttonHeight);
     
         singlePlayButton.addActionListener(e -> {
-            // setVisible(false);
         });
     }
 
