@@ -149,12 +149,12 @@ public class SoccerGameSinglePlayer extends JPanel implements ActionListener, Ke
 
         ballX += ballSpeedX;
         ballY += ballSpeedY;
-        checkCollisions();
+        
 
         movePlayer1();
 
         moveBot();
-
+        checkCollisions();
         checkGoal();
 
         repaint();
@@ -269,7 +269,7 @@ public class SoccerGameSinglePlayer extends JPanel implements ActionListener, Ke
             borderSizeX = 150;
         }
         int borderSizeY = 80;
-
+        
         if (ballX - ballRadius < borderSizeX) {
             ballX = borderSizeX + ballRadius;
             ballSpeedX = Math.abs(ballSpeedX);
@@ -314,11 +314,11 @@ public class SoccerGameSinglePlayer extends JPanel implements ActionListener, Ke
     }
 
     private void checkGoal() {
-        if (ballX < (155 - ballRadius)) {
+        if (ballX < (155 - ballRadius) && (ballY > (0.35 * screenHeight) && ballY < (0.65 * screenHeight))) {
             resetBallToCenter();
             resetPlayersToCenter();
             botScore++;
-        } else if (ballX > (screenWidth - 155 + ballRadius)) {
+        } else if (ballX > (screenWidth - 155 + ballRadius) && (ballY > (0.35 * screenHeight) && ballY < (0.65 * screenHeight))) {
             resetBallToCenter();
             resetPlayersToCenter();
             player1Score++;
