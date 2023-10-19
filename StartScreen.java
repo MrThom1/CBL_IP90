@@ -12,47 +12,59 @@ public class StartScreen extends JPanel implements ActionListener {
     public JButton multiPlayButton;
     public JButton singlePlayButton;
 
-
     public StartScreen(int screenWidth, int screenHeight) {
         JPanel panel = new JPanel();
-        panel.setPreferredSize(new Dimension(screenWidth, screenHeight));  // Set the preferred size to full screen dimensions
+        panel.setPreferredSize(new Dimension(screenWidth, screenHeight));
         panel.setFocusable(true);
-
-        // Load the background image
+    
         try {
-            backgroundImage = ImageIO.read(new File("Startscreen.png"));  // Provide the correct path to your image file
+            backgroundImage = ImageIO.read(new File("Startscreen.png"));
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        // Create a button
-        multiPlayButton = new JButton("Play");
+    
+        multiPlayButton = new JButton("MultiPlayer!");
         int buttonWidth = 360;
-        int buttonHeight = 140;
-        int buttonX = (screenWidth - buttonWidth) / 2 + 200 ;
-        int buttonY = Math.toIntExact(Math.round(((screenHeight - buttonHeight) / 2)*1.9));
-        
-        // Add the button to the panel
+        int buttonHeight = 200;
+        int buttonX = (screenWidth - buttonWidth) / 2 + 200;
+        int buttonY = Math.toIntExact(Math.round(((screenHeight - buttonHeight) / 2) * 1.9));
+    
+        ImageIcon multiPlayerIcon = new ImageIcon("MultiPlayerButton.png");
+        Image multiPlayerImage = multiPlayerIcon.getImage();
+        Image resizedMultiPlayerImage = multiPlayerImage.getScaledInstance(buttonWidth, buttonHeight, Image.SCALE_SMOOTH);
+        multiPlayerIcon = new ImageIcon(resizedMultiPlayerImage);
+    
+        // Make the button transparent
+        multiPlayButton.setContentAreaFilled(false);
+        multiPlayButton.setBorderPainted(false);
+        multiPlayButton.setIcon(multiPlayerIcon);
+    
         this.setLayout(null);
         this.add(multiPlayButton);
-        multiPlayButton.setBounds(buttonX,buttonY,buttonWidth,buttonHeight);  
-
-        // Set a dummy action listener for the button
+        multiPlayButton.setBounds(buttonX, buttonY, buttonWidth, buttonHeight);
+    
         multiPlayButton.addActionListener(e -> {
-            //setVisible(false);
+            // setVisible(false);
         });
-        
-        singlePlayButton = new JButton("Play");
+    
+        singlePlayButton = new JButton("SinglePlayer!");
         buttonX = (screenWidth - buttonWidth) / 2 - 200;
-
-        // Add the button to the panel
-        this.setLayout(null);
+    
+        ImageIcon singlePlayerIcon = new ImageIcon("SinglePlayerButton.png");
+        Image singlePlayerImage = singlePlayerIcon.getImage();
+        Image resizedSinglePlayerImage = singlePlayerImage.getScaledInstance(buttonWidth, buttonHeight, Image.SCALE_SMOOTH);
+        singlePlayerIcon = new ImageIcon(resizedSinglePlayerImage);
+    
+        // Make the button transparent
+        singlePlayButton.setContentAreaFilled(false);
+        singlePlayButton.setBorderPainted(false);
+        singlePlayButton.setIcon(singlePlayerIcon);
+    
         this.add(singlePlayButton);
-        singlePlayButton.setBounds(buttonX,buttonY,buttonWidth,buttonHeight);  
-
-        // Set a dummy action listener for the button
+        singlePlayButton.setBounds(buttonX, buttonY, buttonWidth, buttonHeight);
+    
         singlePlayButton.addActionListener(e -> {
-            //setVisible(false);
+            // setVisible(false);
         });
     }
 
@@ -79,4 +91,3 @@ public class StartScreen extends JPanel implements ActionListener {
         throw new UnsupportedOperationException("Unimplemented method 'actionPerformed'");
     }
 }
-
