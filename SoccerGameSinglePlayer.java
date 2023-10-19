@@ -79,7 +79,7 @@ public class SoccerGameSinglePlayer extends JPanel implements ActionListener, Ke
             e.printStackTrace();
         }
 
-        // Load player 2 image
+        // Load bot image
         try {
             botImage = ImageIO.read(new File("Bot.png"));  // Provide the correct path to your image file
         } catch (IOException e) {
@@ -97,27 +97,32 @@ public class SoccerGameSinglePlayer extends JPanel implements ActionListener, Ke
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-
+    
         // Draw the background image
         if (backgroundImage != null) {
             g.drawImage(backgroundImage, 0, 0, screenWidth, screenHeight, null);
         }
-
+    
         // Draw player 1 image
         if (player1Image != null) {
             g.drawImage(player1Image, player1X - player1Radius, player1Y - player1Radius, 2 * player1Radius, 2 * player1Radius, null);
         }
-
-        // Draw player 2 image
+    
+        // Draw bot image
         if (botImage != null) {
             g.drawImage(botImage, botX - botRadius, botY - botRadius, 2 * botRadius, 2 * botRadius, null);
+    
+        // Draw the bot's name tag
+        g.setColor(Color.WHITE);
+        g.setFont(new Font("Arial", Font.BOLD, 20));
+        g.drawString("Bot", botX - 15, botY - botRadius - 5);
         }
-
+    
         // Draw the ball image
         if (ballImage != null) {
             g.drawImage(ballImage, (int) (ballX - ballRadius), (int) (ballY - ballRadius), 2 * ballRadius, 2 * ballRadius, null);
         }
-
+    
         // Display the timer on the screen
         g.setColor(Color.WHITE);
         g.setFont(new Font("Arial", Font.BOLD, 24));
@@ -125,13 +130,13 @@ public class SoccerGameSinglePlayer extends JPanel implements ActionListener, Ke
         int seconds = timerSeconds % 60;
         String timerString = String.format("%02d:%02d", minutes, seconds);
         g.drawString("" + timerString, screenWidth / 2 - 30, 42);
-
+    
         // Draw the score for player 1
         g.drawString("" + player1Score, screenWidth / 2 - 125, 45);
-
+    
         // Draw the score for player 2
         g.drawString("" + botScore, screenWidth / 2 + 120, 45);
-    }
+    }    
 
     @Override
     public void actionPerformed(ActionEvent e) {
