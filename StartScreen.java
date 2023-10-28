@@ -22,53 +22,50 @@ public class StartScreen extends JPanel implements ActionListener {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    
+        //constants
+        int BUTTONWIDTH = 360;
+        int BUTTONHEIGHT = 200;
+        int BUTTONY = Math.toIntExact(Math.round(((screenHeight - BUTTONHEIGHT) / 2) * 1.9));
+
+        //Create multiplayer button
         multiPlayButton = new JButton("");
-        int buttonWidth = 360;
-        int buttonHeight = 200;
-        int buttonX = (screenWidth - buttonWidth) / 2 + 200;
-        int buttonY = Math.toIntExact(Math.round(((screenHeight - buttonHeight) / 2) * 1.9));
-    
+        int buttonX = (screenWidth - BUTTONWIDTH) / 2 + 200;
+        //Set the icon of the multiplayer button
         ImageIcon multiPlayerIcon = new ImageIcon("MultiPlayerButton.png");
         Image multiPlayerImage = multiPlayerIcon.getImage();
-        Image resizedMultiPlayerImage = multiPlayerImage.getScaledInstance(buttonWidth, buttonHeight, Image.SCALE_SMOOTH);
+        Image resizedMultiPlayerImage = multiPlayerImage.getScaledInstance(BUTTONWIDTH, BUTTONHEIGHT, Image.SCALE_SMOOTH);
         multiPlayerIcon = new ImageIcon(resizedMultiPlayerImage);
-    
-        // Make the button transparent
+        //Make the multiplayer button transparent
         multiPlayButton.setContentAreaFilled(false);
         multiPlayButton.setBorderPainted(false);
         multiPlayButton.setIcon(multiPlayerIcon);
-    
+        //Add the multiplayer to the panel
         this.setLayout(null);
         this.add(multiPlayButton);
-        multiPlayButton.setBounds(buttonX, buttonY, buttonWidth, buttonHeight);
-    
-        multiPlayButton.addActionListener(e -> {
-        });
-    
+        multiPlayButton.setBounds(buttonX, BUTTONY, BUTTONWIDTH, BUTTONHEIGHT);
+
+        //Create singleplayer button
         singlePlayButton = new JButton("");
-        buttonX = (screenWidth - buttonWidth) / 2 - 200;
-    
+        buttonX = (screenWidth - BUTTONWIDTH) / 2 - 200;
+        //Set the icon of the singleplayer button
         ImageIcon singlePlayerIcon = new ImageIcon("SinglePlayerButton.png");
         Image singlePlayerImage = singlePlayerIcon.getImage();
-        Image resizedSinglePlayerImage = singlePlayerImage.getScaledInstance(buttonWidth, buttonHeight, Image.SCALE_SMOOTH);
+        Image resizedSinglePlayerImage = singlePlayerImage.getScaledInstance(BUTTONWIDTH, BUTTONHEIGHT, Image.SCALE_SMOOTH);
         singlePlayerIcon = new ImageIcon(resizedSinglePlayerImage);
-    
-        // Make the button transparent
+        // Make the singleplayer button transparent
         singlePlayButton.setContentAreaFilled(false);
         singlePlayButton.setBorderPainted(false);
         singlePlayButton.setIcon(singlePlayerIcon);
-    
+        //Add the singleplayer to the panel
         this.add(singlePlayButton);
-        singlePlayButton.setBounds(buttonX, buttonY, buttonWidth, buttonHeight);
-    
-        singlePlayButton.addActionListener(e -> {
-        });
+        singlePlayButton.setBounds(buttonX, BUTTONY, BUTTONWIDTH, BUTTONHEIGHT);
     }
 
+    //Add actionlistener to the multiplayer button
     public void addMultiPlayerActionListener(ActionListener listener) {
         multiPlayButton.addActionListener(listener);
     }
+    //Add actionlistener to the singleplayer button    
     public void addSinglePlayerActionListener(ActionListener listener) {
         singlePlayButton.addActionListener(listener);
     }
@@ -76,7 +73,6 @@ public class StartScreen extends JPanel implements ActionListener {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-
         // Draw the background image
         if (backgroundImage != null) {
             g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
