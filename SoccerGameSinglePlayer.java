@@ -52,15 +52,41 @@ public class SoccerGameSinglePlayer extends JPanel implements ActionListener, Ke
                 frame.remove(SoccerGameSinglePlayer.this); //remove the game panel
                 String winner;
                 if (player1Score > botScore) {
-                    winner = "red";
+                    winner = "purple";
                 } else if (player1Score < botScore) {
                     winner = "bot";
                 } else {
                     winner = null;
                 }
-                EndScreen endScreen = new EndScreen(screenWidth, screenHeight, winner); //create an Endscreen
+                EndScreen endScreen = new EndScreen(screenWidth, screenHeight, winner, this); //create an Endscreen
                 frame.add(endScreen);  // Add the Endscreen panel
                 endScreen.requestFocus();
+                endScreen.addBackToStartActionListener(j -> {
+                    endScreen.setVisible(false);  // Hide the start screen
+                    frame.remove(endScreen);
+                    StartScreen startScreen = new StartScreen(screenWidth, screenHeight);
+                    frame.add(startScreen);  // Add the SoccerGame panel
+                    startScreen.requestFocus();
+                    startScreen.addMultiPlayerActionListener(g -> {
+                        startScreen.setVisible(false);  // Hide the start screen
+                        frame.remove(startScreen);
+                        SoccerGameMultiPlayer soccerGame = new SoccerGameMultiPlayer(screenWidth, screenHeight);
+                        frame.add(soccerGame);  // Add the SoccerGame panel
+                        soccerGame.requestFocus();
+                        // Start the game
+                        soccerGame.startSoccerGame(soccerGame);
+                    });
+                    startScreen.addSinglePlayerActionListener(h -> {
+                        startScreen.setVisible(false);  // Hide the start screen
+                        frame.remove(startScreen);
+                        SoccerGameSinglePlayer soccerGame = new SoccerGameSinglePlayer(screenWidth, screenHeight);
+                        frame.add(soccerGame);  // Add the SoccerGame panel
+                        soccerGame.requestFocus();
+                        // Start the game
+                        soccerGame.startSoccerGame(soccerGame);
+
+                    });
+                });
             }
         }
     });

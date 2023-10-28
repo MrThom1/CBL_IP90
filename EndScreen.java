@@ -10,12 +10,12 @@ import java.awt.*;
 public class EndScreen extends JPanel implements ActionListener {
     private Image backgroundImage;
     public JButton backToStart;
-    private int screenWidthText;
     private int screenHeightText;
     private String winner;
 
-    public EndScreen(int screenWidth, int screenHeight, String winnerofgame) {
-        screenWidthText = screenWidth;
+    public EndScreen(int screenWidth, int screenHeight, String winnerofgame, Object soccergame) {
+        soccergame = null;
+        System.gc();
         screenHeightText = screenHeight;
         winner = winnerofgame;
 
@@ -52,7 +52,7 @@ public class EndScreen extends JPanel implements ActionListener {
     }
 
     //Add actionlistener to the multiplayer button
-    public void addMultiPlayerActionListener(ActionListener listener) {
+    public void addBackToStartActionListener(ActionListener listener) {
         backToStart.addActionListener(listener);
     }
 
@@ -62,16 +62,16 @@ public class EndScreen extends JPanel implements ActionListener {
         // Draw the background image
         if (backgroundImage != null) {
             g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
-            Font font = new Font("Serif", Font.PLAIN, 96);
+            Font font = new Font("Serif", Font.PLAIN, 64);
             g.setFont(font);
             if (winner == "red") {
-                g.drawString("Congrats "+winner+", you won!", Math.toIntExact(Math.round(screenWidthText/3)), Math.toIntExact(Math.round(screenHeightText/1.8)));
+                g.drawString("Congrats "+winner+", you won!", 450, Math.toIntExact(Math.round(screenHeightText/1.84)));
             } else if (winner == "purple") {
-                g.drawString("Congrats "+winner+", you won!", Math.toIntExact(Math.round(screenWidthText/3.2)), Math.toIntExact(Math.round(screenHeightText/1.8)));
+                g.drawString("Congrats "+winner+", you won!", 420, Math.toIntExact(Math.round(screenHeightText/1.84)));
             } else if (winner == "bot") {
-                g.drawString("Oh no you lost to the bot, better luck next time!", Math.toIntExact(Math.round(screenWidthText/3)), Math.toIntExact(Math.round(screenHeightText/1.8)));
+                g.drawString("Oh no you lost to the bot, better luck next time!", 140, Math.toIntExact(Math.round(screenHeightText/1.84)));
             } else {
-                g.drawString("That was a draw, try again to see who is better!", 10, Math.toIntExact(Math.round(screenHeightText/1.8)));
+                g.drawString("That was a draw, try again to see who is better!", 140, Math.toIntExact(Math.round(screenHeightText/1.84)));
             }
         }
     }
