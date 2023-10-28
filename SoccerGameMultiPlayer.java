@@ -42,7 +42,12 @@ public class SoccerGameMultiPlayer extends JPanel implements ActionListener, Key
             timerSeconds--;
             if (timerSeconds == 0) {
                 gameTimer.stop();
-                JOptionPane.showMessageDialog(null, "Game Over! Time's up.");
+                Container frame = SoccerGameMultiPlayer.this.getParent(); //Get the frame
+                SoccerGameMultiPlayer.this.setVisible(false);  // Hide the game panel
+                frame.remove(SoccerGameMultiPlayer.this); //remove the game panel
+                EndScreen endScreen = new EndScreen(screenWidth, screenHeight); //create an Endscreen
+                frame.add(endScreen);  // Add the Endscreen panel
+                endScreen.requestFocus();
             }
         }
     });

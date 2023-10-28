@@ -36,19 +36,23 @@ public class SoccerGameSinglePlayer extends JPanel implements ActionListener, Ke
     private int inverseX = 1;
     private int inverseY = 1;
     private long startInverseX = 0;
-    private long startInverseY = 0;
     
     private int player1Score = 0;
     private int botScore = 0;
 
-    private int timerSeconds = 2 * 60;
+    private int timerSeconds = 2*60;
     private Timer gameTimer = new Timer(1000, new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
             timerSeconds--;
             if (timerSeconds == 0) {
                 gameTimer.stop();
-                JOptionPane.showMessageDialog(null, "Game Over! Time's up.");
+                Container frame = SoccerGameSinglePlayer.this.getParent(); //Get the frame
+                SoccerGameSinglePlayer.this.setVisible(false);  // Hide the game panel
+                frame.remove(SoccerGameSinglePlayer.this); //remove the game panel
+                EndScreen endScreen = new EndScreen(screenWidth, screenHeight); //create an Endscreen
+                frame.add(endScreen);  // Add the Endscreen panel
+                endScreen.requestFocus();
             }
         }
     });
@@ -317,7 +321,6 @@ public class SoccerGameSinglePlayer extends JPanel implements ActionListener, Ke
             System.out.println("Distance is 0. Cannot calculate movement step.");
         }
     }
-
 
     private void checkCollisions() {
         int borderSizeX;
