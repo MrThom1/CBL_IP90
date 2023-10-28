@@ -40,7 +40,7 @@ public class SoccerGameSinglePlayer extends JPanel implements ActionListener, Ke
     private int player1Score = 0;
     private int botScore = 0;
 
-    private int timerSeconds = 2;
+    private int timerSeconds = 2*60;
     private Timer gameTimer = new Timer(1000, new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
