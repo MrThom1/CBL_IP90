@@ -45,7 +45,15 @@ public class SoccerGameMultiPlayer extends JPanel implements ActionListener, Key
                 Container frame = SoccerGameMultiPlayer.this.getParent(); //Get the frame
                 SoccerGameMultiPlayer.this.setVisible(false);  // Hide the game panel
                 frame.remove(SoccerGameMultiPlayer.this); //remove the game panel
-                EndScreen endScreen = new EndScreen(screenWidth, screenHeight); //create an Endscreen
+                String winner;
+                if (player1Score > player2Score) {
+                    winner = "red";
+                } else if (player1Score < player2Score) {
+                    winner = "purple";
+                } else {
+                    winner = null;
+                }
+                EndScreen endScreen = new EndScreen(screenWidth, screenHeight, winner); //create an Endscreen
                 frame.add(endScreen);  // Add the Endscreen panel
                 endScreen.requestFocus();
             }

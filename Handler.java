@@ -6,7 +6,7 @@ public class Handler {
     static Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
     static int screenWidth = (int) screenSize.getWidth();
     static int screenHeight = (int) screenSize.getHeight();
-
+    
     public static void main(String[] args) {
         JFrame frame = new JFrame("2D Soccer Game");
         StartScreen startScreen = new StartScreen(screenWidth, screenHeight);

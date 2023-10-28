@@ -40,7 +40,7 @@ public class SoccerGameSinglePlayer extends JPanel implements ActionListener, Ke
     private int player1Score = 0;
     private int botScore = 0;
 
-    private int timerSeconds = 2*60;
+    private int timerSeconds = 2;
     private Timer gameTimer = new Timer(1000, new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -50,7 +50,15 @@ public class SoccerGameSinglePlayer extends JPanel implements ActionListener, Ke
                 Container frame = SoccerGameSinglePlayer.this.getParent(); //Get the frame
                 SoccerGameSinglePlayer.this.setVisible(false);  // Hide the game panel
                 frame.remove(SoccerGameSinglePlayer.this); //remove the game panel
-                EndScreen endScreen = new EndScreen(screenWidth, screenHeight); //create an Endscreen
+                String winner;
+                if (player1Score > botScore) {
+                    winner = "red";
+                } else if (player1Score < botScore) {
+                    winner = "bot";
+                } else {
+                    winner = null;
+                }
+                EndScreen endScreen = new EndScreen(screenWidth, screenHeight, winner); //create an Endscreen
                 frame.add(endScreen);  // Add the Endscreen panel
                 endScreen.requestFocus();
             }
