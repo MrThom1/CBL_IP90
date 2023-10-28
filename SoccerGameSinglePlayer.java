@@ -342,7 +342,6 @@ public class SoccerGameSinglePlayer extends JPanel implements ActionListener, Ke
                 botX += stepX*inverseX;
                 botY += stepY*inverseY;
             }
-            System.out.println(distance+";"+((ballRadius+botRadius)*1.23)+";"+botBehind);
             // Update Bot's position to the nearest valid position within the screen boundaries
             //botX = Math.max(botRadius, Math.min(screenWidth - botRadius, botX));
             botX = Math.max(Math.toIntExact(Math.round(screenWidth*0.15))-botRadius, botX);
