@@ -1,3 +1,10 @@
+/** 
+ * @author Tuur Bosma
+ * @id     1978020
+ * @author Thom Coolen
+ * @id     1971190
+ */
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
