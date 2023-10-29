@@ -24,7 +24,7 @@ public class EndScreen extends JPanel implements ActionListener {
         panel.setFocusable(true);
     
         try {
-            backgroundImage = ImageIO.read(new File("Startscreen.png"));
+            backgroundImage = ImageIO.read(new File("Endscreen.png"));
         } catch (IOException e) {
             e.printStackTrace();
         }
