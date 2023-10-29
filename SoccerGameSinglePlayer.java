@@ -41,9 +41,8 @@ public class SoccerGameSinglePlayer extends JPanel implements ActionListener, Ke
     private Timer timer;
 
     private boolean botBehind = false;
-    private int inverseX = 1;
-    private int inverseY = 1;
-    private long startInverseX = 0;
+    private int inverse = 1;
+    private long startInverse = 0;
     
     private int player1Score = 0;
     private int botScore = 0;
@@ -326,26 +325,24 @@ public class SoccerGameSinglePlayer extends JPanel implements ActionListener, Ke
             stepY = (int) (deltaY * proportion);
             
             // Move towards the ball
-            if (distance < 150 && inverseX == 1) {
+            if (distance < 150 && inverse == 1) {
                 if ((ballX - BALL_RADIUS < borderSizeX | ballX + BALL_RADIUS > SCREEN_WIDTH - borderSizeX) && (ballY - BALL_RADIUS < borderSizeY | ballY + BALL_RADIUS > SCREEN_HEIGHT - borderSizeY)) {
-                    inverseX = -1;
-                    inverseY = -1;
-                    startInverseX = System.currentTimeMillis();
+                    inverse = -1;
+                    startInverse = System.currentTimeMillis();
                 }
 
             }
-            if (System.currentTimeMillis()-startInverseX > 1000){
-                inverseX = 1;
-                inverseY = 1;
+            if (System.currentTimeMillis()-startInverse > 1000){
+                inverse = 1;
             }
 
             if (botX<=ballX | botBehind){
                 moveBotBehindBall();
-                botX += stepX*inverseX;
-                botY += stepY*inverseY;
+                botX += stepX*inverse;
+                botY += stepY*inverse;
             } else {
-                botX += stepX*inverseX;
-                botY += stepY*inverseY;
+                botX += stepX*inverse;
+                botY += stepY*inverse;
             }
             // Update Bot's position to the nearest valid position within the screen boundaries
             botX = Math.max(Math.toIntExact(Math.round(SCREEN_WIDTH*0.15))-BOT_RADIUS, botX);
