@@ -26,7 +26,7 @@ The endscreen also has a button to go back to the startscreen.
 
 Topics of choice:
 
-1. Github
+1. Version control
 
 Topic of choice 1
 To improve our collaboration we chose to utilize version control in this project. 
