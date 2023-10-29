@@ -1,3 +1,5 @@
+
+
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.BufferedImage;
@@ -8,6 +10,11 @@ import java.util.Set;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 public class SoccerGameSinglePlayer extends JPanel implements ActionListener, KeyListener {
+    
+    private final int PLAYER1_RADIUS = 60;
+    private final int BOT_RADIUS = 60;
+    private final int PLAYER_SPEED = 5;
+    private final int BALL_RADIUS = 40;
 
     private BufferedImage backgroundImage;  // Image for the background
     private BufferedImage player1Image; // Image for player 1
@@ -15,18 +22,14 @@ public class SoccerGameSinglePlayer extends JPanel implements ActionListener, Ke
     private BufferedImage ballImage;  // Image for the ball
     private int player1X;
     private int player1Y;
-    private int player1Radius = 60;
     private int botX;
     private int botY;
-    private int botRadius = 60;
     private int ballX;
     private int ballY;
-    private int ballRadius = 40;
     private double ballSpeedX = 0;
     private double ballSpeedY = 0;
-    private int playerSpeed = 5;
-    private int screenWidth;
-    private int screenHeight;
+    private int SCREEN_WIDTH;
+    private int SCREEN_HEIGHT;
     private int stepX;
     private int stepY;
     private Set<Integer> keysPressed = new HashSet<>();
@@ -58,19 +61,19 @@ public class SoccerGameSinglePlayer extends JPanel implements ActionListener, Ke
                 } else {
                     winner = null;
                 }
-                EndScreen endScreen = new EndScreen(screenWidth, screenHeight, winner, this); //create an Endscreen
+                EndScreen endScreen = new EndScreen(SCREEN_WIDTH, SCREEN_HEIGHT, winner, this); 
                 frame.add(endScreen);  // Add the Endscreen panel
                 endScreen.requestFocus();
                 endScreen.addStartScreenButtonActionListener(j -> {
                     endScreen.setVisible(false);  // Hide the start screen
                     frame.remove(endScreen);
-                    StartScreen startScreen = new StartScreen(screenWidth, screenHeight);
+                    StartScreen startScreen = new StartScreen(SCREEN_WIDTH, SCREEN_HEIGHT);
                     frame.add(startScreen);  // Add the SoccerGame panel
                     startScreen.requestFocus();
                     startScreen.addMultiPlayerActionListener(g -> {
                         startScreen.setVisible(false);  // Hide the start screen
                         frame.remove(startScreen);
-                        SoccerGameMultiPlayer soccerGame = new SoccerGameMultiPlayer(screenWidth, screenHeight);
+                        SoccerGameMultiPlayer soccerGame = new SoccerGameMultiPlayer(SCREEN_WIDTH, SCREEN_HEIGHT);
                         frame.add(soccerGame);  // Add the SoccerGame panel
                         soccerGame.requestFocus();
                         // Start the game
@@ -79,7 +82,7 @@ public class SoccerGameSinglePlayer extends JPanel implements ActionListener, Ke
                     startScreen.addSinglePlayerActionListener(h -> {
                         startScreen.setVisible(false);  // Hide the start screen
                         frame.remove(startScreen);
-                        SoccerGameSinglePlayer soccerGame = new SoccerGameSinglePlayer(screenWidth, screenHeight);
+                        SoccerGameSinglePlayer soccerGame = new SoccerGameSinglePlayer(SCREEN_WIDTH, SCREEN_HEIGHT);
                         frame.add(soccerGame);  // Add the SoccerGame panel
                         soccerGame.requestFocus();
                         // Start the game
@@ -91,23 +94,23 @@ public class SoccerGameSinglePlayer extends JPanel implements ActionListener, Ke
         }
     });
 
-    public SoccerGameSinglePlayer(int screenWidth, int screenHeight) {
-        this.screenWidth = screenWidth;
-        this.screenHeight = screenHeight;
+    public SoccerGameSinglePlayer(int SCREEN_WIDTH, int SCREEN_HEIGHT) {
+        this.SCREEN_WIDTH = SCREEN_WIDTH;
+        this.SCREEN_HEIGHT = SCREEN_HEIGHT;
         timer = new Timer(10, this);
         timer.start();
         addKeyListener(this);
         setFocusable(true);
 
         // Set the ball to start in the middle
-        ballX = screenWidth / 2;
-        ballY = screenHeight / 2;
+        ballX = SCREEN_WIDTH / 2;
+        ballY = SCREEN_HEIGHT / 2;
 
         // Set players to the right positions
-        player1X = screenWidth / 2 - 150;
-        player1Y = screenHeight / 2 - 1;
-        botX = screenWidth / 2 + 150;
-        botY = screenHeight / 2 + 1;
+        player1X = SCREEN_WIDTH / 2 - 150;
+        player1Y = SCREEN_HEIGHT / 2 - 1;
+        botX = SCREEN_WIDTH / 2 + 150;
+        botY = SCREEN_HEIGHT / 2 + 1;
 
         // Load the background image
         try {
@@ -118,21 +121,21 @@ public class SoccerGameSinglePlayer extends JPanel implements ActionListener, Ke
 
         // Load player 1 image
         try {
-            player1Image = ImageIO.read(new File("Player1.png"));  // Provide the correct path to your image file
+            player1Image = ImageIO.read(new File("Player1.png")); 
         } catch (IOException e) {
             e.printStackTrace();
         }
 
         // Load bot image
         try {
-            botImage = ImageIO.read(new File("Bot.png"));  // Provide the correct path to your image file
+            botImage = ImageIO.read(new File("Bot.png"));  
         } catch (IOException e) {
             e.printStackTrace();
         }
 
         // Load the ball image
         try {
-            ballImage = ImageIO.read(new File("Football.png"));  // Provide the correct path to your image file
+            ballImage = ImageIO.read(new File("Football.png"));  
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -144,27 +147,27 @@ public class SoccerGameSinglePlayer extends JPanel implements ActionListener, Ke
     
         // Draw the background image
         if (backgroundImage != null) {
-            g.drawImage(backgroundImage, 0, 0, screenWidth, screenHeight, null);
+            g.drawImage(backgroundImage, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, null);
         }
     
         // Draw player 1 image
         if (player1Image != null) {
-            g.drawImage(player1Image, player1X - player1Radius, player1Y - player1Radius, 2 * player1Radius, 2 * player1Radius, null);
+            g.drawImage(player1Image, player1X - PLAYER1_RADIUS, player1Y - PLAYER1_RADIUS, 2 * PLAYER1_RADIUS, 2 * PLAYER1_RADIUS, null);
         }
     
         // Draw bot image
         if (botImage != null) {
-            g.drawImage(botImage, botX - botRadius, botY - botRadius, 2 * botRadius, 2 * botRadius, null);
+            g.drawImage(botImage, botX - BOT_RADIUS, botY - BOT_RADIUS, 2 * BOT_RADIUS, 2 * BOT_RADIUS, null);
     
         // Draw the bot's name tag
         g.setColor(Color.WHITE);
         g.setFont(new Font("Arial", Font.BOLD, 20));
-        g.drawString("Bot", botX - 15, botY - botRadius - 5);
+        g.drawString("Bot", botX - 15, botY - BOT_RADIUS - 5);
         }
     
         // Draw the ball image
         if (ballImage != null) {
-            g.drawImage(ballImage, (int) (ballX - ballRadius), (int) (ballY - ballRadius), 2 * ballRadius, 2 * ballRadius, null);
+            g.drawImage(ballImage, (int) (ballX - BALL_RADIUS), (int) (ballY - BALL_RADIUS), 2 * BALL_RADIUS, 2 * BALL_RADIUS, null);
         }
     
         // Display the timer on the screen
@@ -173,13 +176,13 @@ public class SoccerGameSinglePlayer extends JPanel implements ActionListener, Ke
         int minutes = timerSeconds / 60;
         int seconds = timerSeconds % 60;
         String timerString = String.format("%02d:%02d", minutes, seconds);
-        g.drawString("" + timerString, screenWidth / 2 - 30, 42);
+        g.drawString("" + timerString, SCREEN_WIDTH / 2 - 30, 42);
     
         // Draw the score for player 1
-        g.drawString("" + player1Score, screenWidth / 2 - 125, 45);
+        g.drawString("" + player1Score, SCREEN_WIDTH / 2 - 125, 45);
     
         // Draw the score for player 2
-        g.drawString("" + botScore, screenWidth / 2 + 120, 45);
+        g.drawString("" + botScore, SCREEN_WIDTH / 2 + 120, 45);
     }    
 
     @Override
@@ -217,8 +220,8 @@ public class SoccerGameSinglePlayer extends JPanel implements ActionListener, Ke
         double unitX = dx / distance;
         double unitY = dy / distance;
 
-        ballX = playerX + (int) ((player1Radius + ballRadius) * unitX);
-        ballY = playerY + (int) ((player1Radius + ballRadius) * unitY);
+        ballX = playerX + (int) ((PLAYER1_RADIUS + BALL_RADIUS) * unitX);
+        ballY = playerY + (int) ((PLAYER1_RADIUS + BALL_RADIUS) * unitY);
 
         ballSpeedX = 10 * unitX;
         ballSpeedY = 10 * unitY;
@@ -229,7 +232,7 @@ public class SoccerGameSinglePlayer extends JPanel implements ActionListener, Ke
         double dx = botX - player1X;
         double dy = botY - player1Y;
         double distance = Math.sqrt(dx * dx + dy * dy);
-        double overlap = player1Radius + botRadius - distance;
+        double overlap = PLAYER1_RADIUS + BOT_RADIUS - distance;
 
         if (overlap > 0) {
             double angle = Math.atan2(dy, dx);
@@ -242,16 +245,16 @@ public class SoccerGameSinglePlayer extends JPanel implements ActionListener, Ke
             int newbotX = botX + moveX;
             int newbotY = botY + moveY;
 
-            if (newPlayer1X - player1Radius > 0 && newPlayer1X + player1Radius < screenWidth) {
+            if (newPlayer1X - PLAYER1_RADIUS > 0 && newPlayer1X + PLAYER1_RADIUS < SCREEN_WIDTH) {
                 player1X = newPlayer1X;
             }
-            if (newPlayer1Y - player1Radius > 0 && newPlayer1Y + player1Radius < screenHeight) {
+            if (newPlayer1Y - PLAYER1_RADIUS > 0 && newPlayer1Y + PLAYER1_RADIUS < SCREEN_HEIGHT) {
                 player1Y = newPlayer1Y;
             }
-            if (newbotX - botRadius > 0 && newbotX + botRadius < screenWidth) {
+            if (newbotX - BOT_RADIUS > 0 && newbotX + BOT_RADIUS < SCREEN_WIDTH) {
                 botX = newbotX;
             }
-            if (newbotY - botRadius > 0 && newbotY + botRadius < screenHeight) {
+            if (newbotY - BOT_RADIUS > 0 && newbotY + BOT_RADIUS < SCREEN_HEIGHT) {
                 botY = newbotY;
             }
         }
@@ -261,17 +264,17 @@ public class SoccerGameSinglePlayer extends JPanel implements ActionListener, Ke
         int newPlayer1X = player1X;
         int newPlayer1Y = player1Y;
 
-        if (keysPressed.contains(KeyEvent.VK_W) && player1Y - playerSpeed > player1Radius + (0.10 * screenHeight)) {
-            newPlayer1Y -= playerSpeed;
+        if (keysPressed.contains(KeyEvent.VK_W) && player1Y - PLAYER_SPEED > PLAYER1_RADIUS + (0.10 * SCREEN_HEIGHT)) {
+            newPlayer1Y -= PLAYER_SPEED;
         }
-        if (keysPressed.contains(KeyEvent.VK_S) && player1Y + playerSpeed < screenHeight - player1Radius - (0.10 * screenHeight)) {
-            newPlayer1Y += playerSpeed;
+        if (keysPressed.contains(KeyEvent.VK_S) && player1Y + PLAYER_SPEED < SCREEN_HEIGHT - PLAYER1_RADIUS - (0.10 * SCREEN_HEIGHT)) {
+            newPlayer1Y += PLAYER_SPEED;
         }
-        if (keysPressed.contains(KeyEvent.VK_A) && player1X - playerSpeed > player1Radius + (0.18 * screenHeight)) {
-            newPlayer1X -= playerSpeed;
+        if (keysPressed.contains(KeyEvent.VK_A) && player1X - PLAYER_SPEED > PLAYER1_RADIUS + (0.18 * SCREEN_HEIGHT)) {
+            newPlayer1X -= PLAYER_SPEED;
         }
-        if (keysPressed.contains(KeyEvent.VK_D) && player1X + playerSpeed < screenWidth - player1Radius - (0.18 * screenHeight)) {
-            newPlayer1X += playerSpeed;
+        if (keysPressed.contains(KeyEvent.VK_D) && player1X + PLAYER_SPEED < SCREEN_WIDTH - PLAYER1_RADIUS - (0.18 * SCREEN_HEIGHT)) {
+            newPlayer1X += PLAYER_SPEED;
         }
 
         player1X = newPlayer1X;
@@ -280,15 +283,15 @@ public class SoccerGameSinglePlayer extends JPanel implements ActionListener, Ke
 
     private void moveBotBehindBall() {
         float deltaXToGoal = ballX;
-        float deltaYToGoal = ballY-screenHeight/2;
-        int desiredX = ballX + ballRadius*2;
-        int desiredY = Math.round((deltaYToGoal/deltaXToGoal)*desiredX+screenHeight/2);
+        float deltaYToGoal = ballY-SCREEN_HEIGHT/2;
+        int desiredX = ballX + BALL_RADIUS*2;
+        int desiredY = Math.round((deltaYToGoal/deltaXToGoal)*desiredX+SCREEN_HEIGHT/2);
         double distance = Math.sqrt((desiredX-botX) * (desiredX-botX) + (desiredY-botY) * (desiredY-botY));
-        double proportion = playerSpeed / distance;
+        double proportion = PLAYER_SPEED / distance;
         botBehind = true;
-        if (Math.abs(desiredX-botX)>3) {
+        if (Math.abs(desiredX-botX)>10) {
             stepX = (int) ((desiredX-botX) * proportion);
-        } else if (Math.abs(desiredY-botY)>3) {
+        } else if (Math.abs(desiredY-botY)>10) {
             stepY = (int) ((desiredY-botY) * proportion);
         } else {
             botBehind = false;
@@ -297,17 +300,15 @@ public class SoccerGameSinglePlayer extends JPanel implements ActionListener, Ke
 
     private void moveBot() {
         int borderSizeX;
-        if (ballY > (0.35 * screenHeight) && ballY < (0.65 * screenHeight)) {
-            borderSizeX = Math.toIntExact(Math.round(screenWidth*0.0055));
+        if (ballY > (0.35 * SCREEN_HEIGHT) && ballY < (0.65 * SCREEN_HEIGHT)) {
+            borderSizeX = Math.toIntExact(Math.round(SCREEN_WIDTH*0.0055));
         } else {
-            borderSizeX = Math.toIntExact(Math.round(screenWidth*0.078125*1.3));
+            borderSizeX = Math.toIntExact(Math.round(SCREEN_WIDTH*0.078125*1.3));
         }
-        int borderSizeY = Math.toIntExact(Math.round(screenHeight*0.07407407407*1.2));
+        int borderSizeY = Math.toIntExact(Math.round(SCREEN_HEIGHT*0.07407407407*1.2));
         // Calculate the direction towards the ball
         int deltaX = ballX - botX;
         int deltaY = ballY - botY;
-
-        //System.out.println("DeltaX: " + deltaX + ", DeltaY: " + deltaY);
     
         // Calculate the distance to the ball
         double distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
@@ -315,14 +316,13 @@ public class SoccerGameSinglePlayer extends JPanel implements ActionListener, Ke
         // Ensure the distance is greater than 0 to avoid division by zero
         if (distance > 0) {
             // Calculate a proportion of the distance as the movement step
-            double proportion = playerSpeed / distance;
+            double proportion = PLAYER_SPEED / distance;
             stepX = (int) (deltaX * proportion);
             stepY = (int) (deltaY * proportion);
             
-            //System.out.println("StepX: " + stepX + ", StepY: " + stepY);
             // Move towards the ball
             if (distance < 150 && inverseX == 1) {
-                if ((ballX - ballRadius < borderSizeX | ballX + ballRadius > screenWidth - borderSizeX) && (ballY - ballRadius < borderSizeY | ballY + ballRadius > screenHeight - borderSizeY)) {
+                if ((ballX - BALL_RADIUS < borderSizeX | ballX + BALL_RADIUS > SCREEN_WIDTH - borderSizeX) && (ballY - BALL_RADIUS < borderSizeY | ballY + BALL_RADIUS > SCREEN_HEIGHT - borderSizeY)) {
                     inverseX = -1;
                     inverseY = -1;
                     startInverseX = System.currentTimeMillis();
@@ -343,12 +343,10 @@ public class SoccerGameSinglePlayer extends JPanel implements ActionListener, Ke
                 botY += stepY*inverseY;
             }
             // Update Bot's position to the nearest valid position within the screen boundaries
-            //botX = Math.max(botRadius, Math.min(screenWidth - botRadius, botX));
-            botX = Math.max(Math.toIntExact(Math.round(screenWidth*0.15))-botRadius, botX);
-            botX = Math.min(Math.toIntExact(Math.round(screenWidth*0.85))+botRadius, botX);
-            //botY = Math.max(botRadius, Math.min(screenHeight - botRadius, botY));
-            botY = Math.min(Math.toIntExact(Math.round(screenHeight*0.9))-botRadius, botY);
-            botY = Math.max(Math.toIntExact(Math.round(screenHeight*0.1))+botRadius, botY);
+            botX = Math.max(Math.toIntExact(Math.round(SCREEN_WIDTH*0.15))-BOT_RADIUS, botX);
+            botX = Math.min(Math.toIntExact(Math.round(SCREEN_WIDTH*0.85))+BOT_RADIUS, botX);
+            botY = Math.min(Math.toIntExact(Math.round(SCREEN_HEIGHT*0.9))-BOT_RADIUS, botY);
+            botY = Math.max(Math.toIntExact(Math.round(SCREEN_HEIGHT*0.1))+BOT_RADIUS, botY);
 
         } else {
             System.out.println("Distance is 0. Cannot calculate movement step.");
@@ -357,63 +355,65 @@ public class SoccerGameSinglePlayer extends JPanel implements ActionListener, Ke
 
     private void checkCollisions() {
         int borderSizeX;
-        if (ballY > (0.35 * screenHeight) && ballY < (0.65 * screenHeight)) {
-            borderSizeX = Math.toIntExact(Math.round(screenWidth*0.0055));
+        if (ballY > (0.35 * SCREEN_HEIGHT) && ballY < (0.65 * SCREEN_HEIGHT)) {
+            borderSizeX = Math.toIntExact(Math.round(SCREEN_WIDTH*0.0055));
         } else {
-            borderSizeX = Math.toIntExact(Math.round(screenWidth*0.078125*1.3));
+            borderSizeX = Math.toIntExact(Math.round(SCREEN_WIDTH*0.078125*1.3));
         }
-        int borderSizeY = Math.toIntExact(Math.round(screenHeight*0.07407407407*1.2));
+        int borderSizeY = Math.toIntExact(Math.round(SCREEN_HEIGHT*0.07407407407*1.2));
         
-        if (ballX - ballRadius < borderSizeX) {
-            ballX = borderSizeX + ballRadius;
+        if (ballX - BALL_RADIUS < borderSizeX) {
+            ballX = borderSizeX + BALL_RADIUS;
             ballSpeedX = Math.abs(ballSpeedX);
-        } else if (ballX + ballRadius > screenWidth - borderSizeX) {
-            ballX = screenWidth - borderSizeX - ballRadius;
+        } else if (ballX + BALL_RADIUS > SCREEN_WIDTH - borderSizeX) {
+            ballX = SCREEN_WIDTH - borderSizeX - BALL_RADIUS;
             ballSpeedX = -Math.abs(ballSpeedX);
         }
 
-        if (ballY - ballRadius < borderSizeY) {
-            ballY = borderSizeY + ballRadius;
+        if (ballY - BALL_RADIUS < borderSizeY) {
+            ballY = borderSizeY + BALL_RADIUS;
             ballSpeedY = Math.abs(ballSpeedY);
-        } else if (ballY + ballRadius > screenHeight - borderSizeY) {
-            ballY = screenHeight - borderSizeY - ballRadius;
+        } else if (ballY + BALL_RADIUS > SCREEN_HEIGHT - borderSizeY) {
+            ballY = SCREEN_HEIGHT - borderSizeY - BALL_RADIUS;
             ballSpeedY = -Math.abs(ballSpeedY);
         }
 
         handlePlayerbotCollision();
 
         double distancePlayer1 = Math.sqrt(Math.pow(ballX - player1X, 2) + Math.pow(ballY - player1Y, 2));
-        if (distancePlayer1 < ballRadius + player1Radius) {
+        if (distancePlayer1 < BALL_RADIUS + PLAYER1_RADIUS) {
             handleCollision(player1X, player1Y);
         }
 
         double distancebot = Math.sqrt(Math.pow(ballX - botX, 2) + Math.pow(ballY - botY, 2));
-        if (distancebot < ballRadius + botRadius) {
+        if (distancebot < BALL_RADIUS + BOT_RADIUS) {
             handleCollision(botX, botY);
         }
     }
 
     private void resetBallToCenter() {
-        ballX = screenWidth / 2;
-        ballY = screenHeight / 2;
+        ballX = SCREEN_WIDTH / 2;
+        ballY = SCREEN_HEIGHT / 2;
         ballSpeedX = 0;
         ballSpeedY = 0;
     }
 
     private void resetPlayersToCenter() {
-        player1X = screenWidth / 2 - 150;
-        player1Y = screenHeight / 2 - 1;
-        botX = screenWidth / 2 + 150;
-        botY = screenHeight / 2 + 1;
+        player1X = SCREEN_WIDTH / 2 - 150;
+        player1Y = SCREEN_HEIGHT / 2 - 1;
+        botX = SCREEN_WIDTH / 2 + 150;
+        botY = SCREEN_HEIGHT / 2 + 1;
         botBehind = false;
     }
-
+    
+    //Check whether a goal is scored
     private void checkGoal() {
-        if (ballX < (Math.toIntExact(Math.round(screenWidth*0.078125*1.3)) - ballRadius) && (ballY > (0.35 * screenHeight) && ballY < (0.65 * screenHeight))) {
+        long goalBorder = Math.round(SCREEN_WIDTH*0.078125*1.3);
+        if (ballX < Math.toIntExact(goalBorder-BALL_RADIUS) && (ballY > (0.35 * SCREEN_HEIGHT) && ballY < (0.65 * SCREEN_HEIGHT))) {
             resetBallToCenter();
             resetPlayersToCenter();
             botScore++;
-        } else if (ballX > (screenWidth - Math.toIntExact(Math.round(screenWidth*0.078125*1.3)) + ballRadius) && (ballY > (0.35 * screenHeight) && ballY < (0.65 * screenHeight))) {
+        } else if (ballX > SCREEN_WIDTH - Math.toIntExact(goalBorder - BALL_RADIUS) && (ballY > (0.35 * SCREEN_HEIGHT) && ballY < (0.65 * SCREEN_HEIGHT))) {
             resetBallToCenter();
             resetPlayersToCenter();
             player1Score++;
