@@ -1,5 +1,5 @@
 Names and student IDs: Tuur Bosma (1978020)
-		       Thom Coolen (1971190)
+		    		   Thom Coolen (1971190)
 
 We created a 1v1 soccergame named BoCo. (Bosma + Coolen)
 The game is intended to be played on a 1920x1080 screen.
@@ -88,21 +88,3 @@ This minimizes the downtime and maximizes the user experience.
 Our game provides an endscreen that announces the winner, which will bring closure to the game and clearly displays the outcome.
 Because of our button on the endscreen, that makes the user go back to the startscreen, you will not have to restart the game.
 If you want to play a rematch against your friend, you can just start a new game via those buttons, in stead of rerunning the code.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
