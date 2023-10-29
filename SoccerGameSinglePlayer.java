@@ -10,6 +10,11 @@ import java.util.Set;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 public class SoccerGameSinglePlayer extends JPanel implements ActionListener, KeyListener {
+    
+    private final int PLAYER1_RADIUS = 60;
+    private final int BOT_RADIUS = 60;
+    private final int PLAYER_SPEED = 5;
+    private final int BALL_RADIUS = 40;
 
     private BufferedImage backgroundImage;  // Image for the background
     private BufferedImage player1Image; // Image for player 1
@@ -23,10 +28,6 @@ public class SoccerGameSinglePlayer extends JPanel implements ActionListener, Ke
     private int ballY;
     private double ballSpeedX = 0;
     private double ballSpeedY = 0;
-    private final int PLAYER1_RADIUS = 60;
-    private final int BOT_RADIUS = 60;
-    private final int PLAYER_SPEED = 5;
-    private final int BALL_RADIUS = 40;
     private int SCREEN_WIDTH;
     private int SCREEN_HEIGHT;
     private int stepX;
@@ -60,7 +61,7 @@ public class SoccerGameSinglePlayer extends JPanel implements ActionListener, Ke
                 } else {
                     winner = null;
                 }
-                EndScreen endScreen = new EndScreen(SCREEN_WIDTH, SCREEN_HEIGHT, winner, this); //create an Endscreen
+                EndScreen endScreen = new EndScreen(SCREEN_WIDTH, SCREEN_HEIGHT, winner, this); 
                 frame.add(endScreen);  // Add the Endscreen panel
                 endScreen.requestFocus();
                 endScreen.addStartScreenButtonActionListener(j -> {
@@ -120,21 +121,21 @@ public class SoccerGameSinglePlayer extends JPanel implements ActionListener, Ke
 
         // Load player 1 image
         try {
-            player1Image = ImageIO.read(new File("Player1.png"));  // Provide the correct path to your image file
+            player1Image = ImageIO.read(new File("Player1.png")); 
         } catch (IOException e) {
             e.printStackTrace();
         }
 
         // Load bot image
         try {
-            botImage = ImageIO.read(new File("Bot.png"));  // Provide the correct path to your image file
+            botImage = ImageIO.read(new File("Bot.png"));  
         } catch (IOException e) {
             e.printStackTrace();
         }
 
         // Load the ball image
         try {
-            ballImage = ImageIO.read(new File("Football.png"));  // Provide the correct path to your image file
+            ballImage = ImageIO.read(new File("Football.png"));  
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -404,13 +405,15 @@ public class SoccerGameSinglePlayer extends JPanel implements ActionListener, Ke
         botY = SCREEN_HEIGHT / 2 + 1;
         botBehind = false;
     }
-
+    
+    //Check whether a goal is scored
     private void checkGoal() {
-        if (ballX < (Math.toIntExact(Math.round(SCREEN_WIDTH*0.078125*1.3)) - BALL_RADIUS) && (ballY > (0.35 * SCREEN_HEIGHT) && ballY < (0.65 * SCREEN_HEIGHT))) {
+        long goalBorder = Math.round(SCREEN_WIDTH*0.078125*1.3);
+        if (ballX < Math.toIntExact(goalBorder-BALL_RADIUS) && (ballY > (0.35 * SCREEN_HEIGHT) && ballY < (0.65 * SCREEN_HEIGHT))) {
             resetBallToCenter();
             resetPlayersToCenter();
             botScore++;
-        } else if (ballX > (SCREEN_WIDTH - Math.toIntExact(Math.round(SCREEN_WIDTH*0.078125*1.3)) + BALL_RADIUS) && (ballY > (0.35 * SCREEN_HEIGHT) && ballY < (0.65 * SCREEN_HEIGHT))) {
+        } else if (ballX > SCREEN_WIDTH - Math.toIntExact(goalBorder - BALL_RADIUS) && (ballY > (0.35 * SCREEN_HEIGHT) && ballY < (0.65 * SCREEN_HEIGHT))) {
             resetBallToCenter();
             resetPlayersToCenter();
             player1Score++;

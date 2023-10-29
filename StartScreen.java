@@ -22,11 +22,12 @@ public class StartScreen extends JPanel implements ActionListener {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
         //constants
         final int BUTTON_WIDTH = 360;
         final int BUTTON_HEIGHT = 200;
         final int BUTTON_Y = Math.toIntExact(Math.round(((SCREEN_HEIGHT - BUTTON_HEIGHT) / 2) * 1.9));
-
+        
         //Create multiplayer button
         multiPlayButton = new JButton("");
         int buttonX = (SCREEN_WIDTH - BUTTON_WIDTH) / 2 + 200;
@@ -52,7 +53,7 @@ public class StartScreen extends JPanel implements ActionListener {
         Image singlePlayerImage = singlePlayerIcon.getImage();
         Image resizedSinglePlayerImage = singlePlayerImage.getScaledInstance(BUTTON_WIDTH, BUTTON_HEIGHT, Image.SCALE_SMOOTH);
         singlePlayerIcon = new ImageIcon(resizedSinglePlayerImage);
-        // Make the singleplayer button transparent
+        //Make the singleplayer button transparent
         singlePlayButton.setContentAreaFilled(false);
         singlePlayButton.setBorderPainted(false);
         singlePlayButton.setIcon(singlePlayerIcon);
@@ -61,11 +62,20 @@ public class StartScreen extends JPanel implements ActionListener {
         singlePlayButton.setBounds(buttonX, BUTTON_Y, BUTTON_WIDTH, BUTTON_HEIGHT);
     }
 
-    //Add actionlistener to the multiplayer button
+    /**
+     * Add actionlistener to the multiplayer button
+     *
+     * @param listener events that will be executed when to the multiplayer button is clicked
+     */
     public void addMultiPlayerActionListener(ActionListener listener) {
         multiPlayButton.addActionListener(listener);
     }
-    //Add actionlistener to the singleplayer button    
+
+    /**
+     * Add actionlistener to the singleplayer button
+     *
+     * @param listener events that will be executed when to the singleplayer button is clicked
+     */  
     public void addSinglePlayerActionListener(ActionListener listener) {
         singlePlayButton.addActionListener(listener);
     }
@@ -73,7 +83,7 @@ public class StartScreen extends JPanel implements ActionListener {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        // Draw the background image
+        //Draw the background image
         if (backgroundImage != null) {
             g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
         }
@@ -81,7 +91,6 @@ public class StartScreen extends JPanel implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'actionPerformed'");
+        //Not used
     }
 }

@@ -51,7 +51,11 @@ public class EndScreen extends JPanel implements ActionListener {
         StartScreenButton.setBounds(buttonX, BUTTON_Y, BUTTON_WIDTH, BUTTON_HEIGHT);
     }
 
-    //Add actionlistener to the StartScreenButton button
+    /**
+     * Add actionlistener to the back to start button
+     *
+     * @param listener events that will be executed when to the singleplayer button is clicked
+     */  
     public void addStartScreenButtonActionListener(ActionListener listener) {
         StartScreenButton.addActionListener(listener);
     }
@@ -78,6 +82,6 @@ public class EndScreen extends JPanel implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-
+        //Not used
     }
 }

@@ -10,6 +10,11 @@ import java.util.Set;
 
 public class SoccerGameMultiPlayer extends JPanel implements ActionListener, KeyListener {
 
+    final private int PLAYER1_RADIUS = 60; 
+    final private int PLAYER2_RADIUS = 60;  
+    final private int BALL_RADIUS = 40;
+    final private int PLAYER_SPEED = 5;
+    
     private BufferedImage backgroundImage;  // Image for the background
     private BufferedImage player1Image; // Image for player 1
     private BufferedImage player2Image; // Image for player 2
@@ -22,12 +27,8 @@ public class SoccerGameMultiPlayer extends JPanel implements ActionListener, Key
     private int ballY;
     private double ballSpeedX = 0;
     private double ballSpeedY = 0; 
-    final private int PLAYER1_RADIUS = 60; 
-    final private int PLAYER2_RADIUS = 60;  
-    final private int BALL_RADIUS = 40;
-    final private int PLAYER_SPEED = 5;
-    final private int SCREEN_WIDTH;
-    final private int SCREEN_HEIGHT;
+    private int SCREEN_WIDTH;
+    private int SCREEN_HEIGHT;
 
     private Set<Integer> keysPressed = new HashSet<>();
     private Timer timer;
@@ -196,6 +197,12 @@ public class SoccerGameMultiPlayer extends JPanel implements ActionListener, Key
         repaint();
     }
 
+    /**
+     * Handle the collision between the ball and the player
+     *
+     * @param playerX x-coordinate of player
+     * @param playerY y-coordinate of player
+     */  
     public void handleCollision(int playerX, int playerY) {
         int dx = ballX - playerX;
         int dy = ballY - playerY;
@@ -211,7 +218,8 @@ public class SoccerGameMultiPlayer extends JPanel implements ActionListener, Key
         ballSpeedY = 10 * unitY;
 
     }
-
+    
+    //Handle the collision between the players
     public void handlePlayerCollision() {
         double dx = player2X - player1X;
         double dy = player2Y - player1Y;
@@ -243,7 +251,8 @@ public class SoccerGameMultiPlayer extends JPanel implements ActionListener, Key
             }
         }
     }
-
+    
+    //Move players depending on the which keys are pressed
     public void movePlayers() {
         int newPlayer1X = player1X;
         int newPlayer1Y = player1Y;
@@ -282,15 +291,16 @@ public class SoccerGameMultiPlayer extends JPanel implements ActionListener, Key
         player2X = newPlayer2X;
         player2Y = newPlayer2Y;
     }
-
+    
+    //Check whether the ball is colliding with the border and if there collision between players
     public void checkCollisions() {
         int borderSizeX;
         if (ballY > (0.35 * SCREEN_HEIGHT) && ballY < (0.65 * SCREEN_HEIGHT)) {
-            borderSizeX = 10;
+            borderSizeX = Math.toIntExact(Math.round(SCREEN_WIDTH*0.0055));;
         } else {
-            borderSizeX = 150;
+            borderSizeX = Math.toIntExact(Math.round(SCREEN_WIDTH*0.078125*1.3));
         }
-        int borderSizeY = 80;
+        int borderSizeY = Math.toIntExact(Math.round(SCREEN_HEIGHT*0.07407407407*1.2));
 
         if (ballX - BALL_RADIUS < borderSizeX) {
             ballX = borderSizeX + BALL_RADIUS;
@@ -321,6 +331,7 @@ public class SoccerGameMultiPlayer extends JPanel implements ActionListener, Key
         }
     }
 
+    //Reset the ball to the center
     public void resetBallToCenter() {
         ballX = SCREEN_WIDTH / 2;
         ballY = SCREEN_HEIGHT / 2;
@@ -328,6 +339,7 @@ public class SoccerGameMultiPlayer extends JPanel implements ActionListener, Key
         ballSpeedY = 0;
     }
 
+    //Reset the players to the center
     public void resetPlayersToCenter() {
         player1X = SCREEN_WIDTH / 2 - 150;
         player1Y = SCREEN_HEIGHT / 2 - 1;
@@ -335,12 +347,14 @@ public class SoccerGameMultiPlayer extends JPanel implements ActionListener, Key
         player2Y = SCREEN_HEIGHT / 2 + 1;
     }
 
+    //Check whether a goal is scored
     public void checkGoal() {
-        if (ballX < (155 - BALL_RADIUS)) {
+        long goalBorder = Math.round(SCREEN_WIDTH*0.078125*1.3);
+        if (ballX < Math.toIntExact(goalBorder-BALL_RADIUS) && (ballY > (0.35 * SCREEN_HEIGHT) && ballY < (0.65 * SCREEN_HEIGHT))) {
             resetBallToCenter();
             resetPlayersToCenter();
             player2Score++;
-        } else if (ballX > (SCREEN_WIDTH - 155 + BALL_RADIUS)) {
+        } else if (ballX > SCREEN_WIDTH - Math.toIntExact(goalBorder - BALL_RADIUS) && (ballY > (0.35 * SCREEN_HEIGHT) && ballY < (0.65 * SCREEN_HEIGHT))) {
             resetBallToCenter();
             resetPlayersToCenter();
             player1Score++;
