@@ -13,14 +13,14 @@ public class EndScreen extends JPanel implements ActionListener {
     private int screenHeightText;
     private String winner;
 
-    public EndScreen(int screenWidth, int screenHeight, String winnerofgame, Object soccergame) {
+    public EndScreen(int SCREEN_WIDTH, int SCREEN_HEIGHT, String winnerofgame, Object soccergame) {
         soccergame = null;
         System.gc();
-        screenHeightText = screenHeight;
+        screenHeightText = SCREEN_HEIGHT;
         winner = winnerofgame;
 
         JPanel panel = new JPanel();
-        panel.setPreferredSize(new Dimension(screenWidth, screenHeight));
+        panel.setPreferredSize(new Dimension(SCREEN_WIDTH, SCREEN_HEIGHT));
         panel.setFocusable(true);
     
         try {
@@ -29,17 +29,17 @@ public class EndScreen extends JPanel implements ActionListener {
             e.printStackTrace();
         }
         //constants
-        int BUTTONWIDTH = 540;
-        int BUTTONHEIGHT = 300;
-        int BUTTONY = Math.toIntExact(Math.round(((screenHeight - BUTTONHEIGHT) / 2) * 1.8));
+        final int BUTTON_WIDTH = 540;
+        final int BUTTON_HEIGHT = 300;
+        final int BUTTON_Y = Math.toIntExact(Math.round(((SCREEN_HEIGHT - BUTTON_HEIGHT) / 2) * 1.8));
 
         //Create StartScreenButton
         StartScreenButton = new JButton();
-        int buttonX = (screenWidth - BUTTONWIDTH) / 2;
+        int buttonX = (SCREEN_WIDTH - BUTTON_WIDTH) / 2;
         //Set the icon of the StartScreenButton
         ImageIcon StartScreenIcon = new ImageIcon("StartScreenButton.png");
         Image StartScreenImage = StartScreenIcon.getImage();
-        Image resizedStartScreenImage = StartScreenImage.getScaledInstance(BUTTONWIDTH, BUTTONHEIGHT, Image.SCALE_SMOOTH);
+        Image resizedStartScreenImage = StartScreenImage.getScaledInstance(BUTTON_WIDTH, BUTTON_HEIGHT, Image.SCALE_SMOOTH);
         StartScreenIcon = new ImageIcon(resizedStartScreenImage);
         //Make the StartScreenButton transparent
         StartScreenButton.setContentAreaFilled(false);
@@ -48,7 +48,7 @@ public class EndScreen extends JPanel implements ActionListener {
         //Add the StartScreenButton to the panel
         this.setLayout(null);
         this.add(StartScreenButton);
-        StartScreenButton.setBounds(buttonX, BUTTONY, BUTTONWIDTH, BUTTONHEIGHT);
+        StartScreenButton.setBounds(buttonX, BUTTON_Y, BUTTON_WIDTH, BUTTON_HEIGHT);
     }
 
     //Add actionlistener to the StartScreenButton button
@@ -76,7 +76,6 @@ public class EndScreen extends JPanel implements ActionListener {
         }
     }
 
-    
     @Override
     public void actionPerformed(ActionEvent e) {
 
