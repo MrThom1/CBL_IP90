@@ -28,6 +28,27 @@ Topics of choice:
 
 1. Github
 
+Topic of choice 1
+To improve our collaboration we chose to utilize version control in this project. 
+In GitHub, in combination with GitHub Desktop we found the ultimate tool for this group project. 
+Since we were both new to Git/version control it took some time to adjust this type of collaboration.
+Once we understood it, it was apparent why GitHub is such a widely used application.
+
+Usage of GitHub:
+GitHub proved to be very useful as we were able to store code and accompanying pictures on the internet, giving us the flexibility to work from any location. 
+We would open the newest version of the code with GitHub Desktop and once we were done with a certain part we could push it to the origin using GitHub Desktop.
+Of course, when committing changes to the code we added a description. 
+This description allows the other to understand the code changes better and makes it easier to go back in the history to see when something was changed.
+
+Points of improvement:
+Since this was our first using GitHub we did not use it to its fullest extent from the beginning.
+The first time we added something to GitHub it was in one big chunk, so we should have added it in smaller parts.
+But during the project, we were able to add code in smaller and smaller chunks. Furthermore, the descriptions could be clearer and with more detail, 
+now we only added a description title without further explanation. 
+Lastly, since we worked on it in person or on call, we did not use the code review functionality. 
+We can imagine that that is something that we might use more the next time.
+
+This URL brings you to the repository: https://github.com/MrThom1/CBL_IP90 
 
 
 
