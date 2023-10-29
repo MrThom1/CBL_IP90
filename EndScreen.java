@@ -9,7 +9,7 @@ import java.awt.*;
 
 public class EndScreen extends JPanel implements ActionListener {
     private Image backgroundImage;
-    public JButton backToStart;
+    public JButton StartScreenButton;
     private int screenHeightText;
     private String winner;
 
@@ -33,27 +33,27 @@ public class EndScreen extends JPanel implements ActionListener {
         int BUTTONHEIGHT = 300;
         int BUTTONY = Math.toIntExact(Math.round(((screenHeight - BUTTONHEIGHT) / 2) * 1.8));
 
-        //Create multiplayer button
-        backToStart = new JButton();
+        //Create StartScreenButton
+        StartScreenButton = new JButton();
         int buttonX = (screenWidth - BUTTONWIDTH) / 2;
-        //Set the icon of the multiplayer button
-        ImageIcon multiPlayerIcon = new ImageIcon("MultiPlayerButton.png");
-        Image multiPlayerImage = multiPlayerIcon.getImage();
-        Image resizedMultiPlayerImage = multiPlayerImage.getScaledInstance(BUTTONWIDTH, BUTTONHEIGHT, Image.SCALE_SMOOTH);
-        multiPlayerIcon = new ImageIcon(resizedMultiPlayerImage);
-        //Make the multiplayer button transparent
-        backToStart.setContentAreaFilled(false);
-        backToStart.setBorderPainted(false);
-        backToStart.setIcon(multiPlayerIcon);
-        //Add the multiplayer to the panel
+        //Set the icon of the StartScreenButton
+        ImageIcon StartScreenIcon = new ImageIcon("StartScreenButton.png");
+        Image StartScreenImage = StartScreenIcon.getImage();
+        Image resizedStartScreenImage = StartScreenImage.getScaledInstance(BUTTONWIDTH, BUTTONHEIGHT, Image.SCALE_SMOOTH);
+        StartScreenIcon = new ImageIcon(resizedStartScreenImage);
+        //Make the StartScreenButton transparent
+        StartScreenButton.setContentAreaFilled(false);
+        StartScreenButton.setBorderPainted(false);
+        StartScreenButton.setIcon(StartScreenIcon);
+        //Add the StartScreenButton to the panel
         this.setLayout(null);
-        this.add(backToStart);
-        backToStart.setBounds(buttonX, BUTTONY, BUTTONWIDTH, BUTTONHEIGHT);
+        this.add(StartScreenButton);
+        StartScreenButton.setBounds(buttonX, BUTTONY, BUTTONWIDTH, BUTTONHEIGHT);
     }
 
-    //Add actionlistener to the multiplayer button
-    public void addBackToStartActionListener(ActionListener listener) {
-        backToStart.addActionListener(listener);
+    //Add actionlistener to the StartScreenButton button
+    public void addStartScreenButtonActionListener(ActionListener listener) {
+        StartScreenButton.addActionListener(listener);
     }
 
     @Override
@@ -64,12 +64,12 @@ public class EndScreen extends JPanel implements ActionListener {
             g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
             Font font = new Font("Serif", Font.PLAIN, 64);
             g.setFont(font);
-            if (winner == "red") {
+            if (winner == "Player 2 (Red)") {
                 g.drawString("Congrats "+winner+", you won!", 450, Math.toIntExact(Math.round(screenHeightText/1.84)));
-            } else if (winner == "purple") {
+            } else if (winner == "Player 1 (Purple)") {
                 g.drawString("Congrats "+winner+", you won!", 420, Math.toIntExact(Math.round(screenHeightText/1.84)));
-            } else if (winner == "bot") {
-                g.drawString("Oh no you lost to the bot, better luck next time!", 140, Math.toIntExact(Math.round(screenHeightText/1.84)));
+            } else if (winner == "Bot") {
+                g.drawString("Oh no you lost to the Bot, better luck next time!", 140, Math.toIntExact(Math.round(screenHeightText/1.84)));
             } else {
                 g.drawString("That was a draw, try again to see who is better!", 140, Math.toIntExact(Math.round(screenHeightText/1.84)));
             }

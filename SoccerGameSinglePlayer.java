@@ -61,7 +61,7 @@ public class SoccerGameSinglePlayer extends JPanel implements ActionListener, Ke
                 EndScreen endScreen = new EndScreen(screenWidth, screenHeight, winner, this); //create an Endscreen
                 frame.add(endScreen);  // Add the Endscreen panel
                 endScreen.requestFocus();
-                endScreen.addBackToStartActionListener(j -> {
+                endScreen.addStartScreenButtonActionListener(j -> {
                     endScreen.setVisible(false);  // Hide the start screen
                     frame.remove(endScreen);
                     StartScreen startScreen = new StartScreen(screenWidth, screenHeight);
