@@ -1,11 +1,18 @@
+/** 
+ * @author Tuur Bosma
+ * @id     1978020
+ * @author Thom Coolen
+ * @id     1971190
+ */
+
+import java.awt.*;
+import java.awt.event.*;
+import java.io.File;
+import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
-import java.awt.event.*;
-import java.io.File;
-import java.io.IOException;
-import java.awt.*;
 
 public class EndScreen extends JPanel implements ActionListener {
     private Image backgroundImage;
@@ -69,19 +76,18 @@ public class EndScreen extends JPanel implements ActionListener {
             Font font = new Font("Serif", Font.PLAIN, 64);
             g.setFont(font);
             if (winner == "red") {
-                g.drawString("Congrats player 2 ("+winner+"), you won!", 320, Math.toIntExact(Math.round(screenHeightText/1.84)));
+                g.drawString("Congrats player 2 (" + winner + "), you won!", 320, Math.toIntExact(Math.round(screenHeightText / 1.84)));
             } else if (winner == "purple") {
-                g.drawString("Congrats player 1 ("+winner+"), you won!", 300, Math.toIntExact(Math.round(screenHeightText/1.84)));
+                g.drawString("Congrats player 1 (" + winner + "), you won!", 300, Math.toIntExact(Math.round(screenHeightText / 1.84)));
             } else if (winner == "bot") {
-                g.drawString("Oh no you lost to the "+winner+", better luck next time!", 140, Math.toIntExact(Math.round(screenHeightText/1.84)));
+                g.drawString("Oh no you lost to the " + winner + ", better luck next time!", 140, Math.toIntExact(Math.round(screenHeightText / 1.84)));
             } else {
-                g.drawString("That was a draw, try again to see who is better!", 140, Math.toIntExact(Math.round(screenHeightText/1.84)));
+                g.drawString("That was a draw, try again to see who is better!", 140, Math.toIntExact(Math.round(screenHeightText / 1.84)));
             }
         }
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        //Not used
     }
 }
