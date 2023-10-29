@@ -64,12 +64,12 @@ public class EndScreen extends JPanel implements ActionListener {
             g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
             Font font = new Font("Serif", Font.PLAIN, 64);
             g.setFont(font);
-            if (winner == "Player 2 (Red)") {
-                g.drawString("Congrats "+winner+", you won!", 450, Math.toIntExact(Math.round(screenHeightText/1.84)));
-            } else if (winner == "Player 1 (Purple)") {
-                g.drawString("Congrats "+winner+", you won!", 420, Math.toIntExact(Math.round(screenHeightText/1.84)));
-            } else if (winner == "Bot") {
-                g.drawString("Oh no you lost to the Bot, better luck next time!", 140, Math.toIntExact(Math.round(screenHeightText/1.84)));
+            if (winner == "red") {
+                g.drawString("Congrats player 2 ("+winner+"), you won!", 320, Math.toIntExact(Math.round(screenHeightText/1.84)));
+            } else if (winner == "purple") {
+                g.drawString("Congrats player 1 ("+winner+"), you won!", 300, Math.toIntExact(Math.round(screenHeightText/1.84)));
+            } else if (winner == "bot") {
+                g.drawString("Oh no you lost to the "+winner+", better luck next time!", 140, Math.toIntExact(Math.round(screenHeightText/1.84)));
             } else {
                 g.drawString("That was a draw, try again to see who is better!", 140, Math.toIntExact(Math.round(screenHeightText/1.84)));
             }
